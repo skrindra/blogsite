@@ -104,7 +104,8 @@ def admin_only(function):
             if current_user.id != 1:
                 return abort(403)
             # Otherwise continue with the route function
-            return function(*args, **kwargs)
+            else:
+                return function(*args, **kwargs)
 
         # if no one has logged in yet, return 403 Error
         except AttributeError:
