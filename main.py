@@ -100,17 +100,19 @@ def admin_only(function):
     @wraps(function)
     def decorated_function(*args, **kwargs):
         # If id is not 1 then return abort with 403 error
-        try:
-            if current_user.id != 1:
-                return abort(403)
-            # Otherwise continue with the route function
-            else:
-                return function(*args, **kwargs)
-
-        # if no one has logged in yet, return 403 Error
-        except AttributeError:
+        # try:
+        #     if current_user.id != 1:
+        #         return abort(403)
+        #     # Otherwise continue with the route function
+        #     else:
+        #         return function(*args, **kwargs)
+        #
+        # # if no one has logged in yet, return 403 Error
+        # except AttributeError:
+        #     return abort(403)
+        if current_user.id != 1:
             return abort(403)
-
+        return function(*args, **kwargs)
     return decorated_function
 
 
